@@ -8,11 +8,11 @@
 #include "my_ls.h"
 
 static const struct flag_format flag_list[] = {
-    {'l', FLAG_L_LOWER},
-    {'r', FLAG_R_LOWER},
-    {'R', FLAG_R_UPPER},
-    {'d', FLAG_D_LOWER},
-    {'t', FLAG_T_LOWER},
+    {'l', L_LOWER},
+    {'r', R_LOWER},
+    {'R', R_UPPER},
+    {'d', D_LOWER},
+    {'t', T_LOWER},
     {'\0', UNKNOWN_FLAG}
 };
 
@@ -28,18 +28,22 @@ static int find_in_flag_list(char letter)
     return (UNKNOWN_FLAG);
 }
 
-static void init_flags(flag_t *flags)
+static int init_flags(flag_t *flags)
 {
+    int i = 0;
     int count = 0;
 
     while (flag_list[count].letter != '\0')
         count += 1;
-    flags->nb = count;
-    count = 0;
-    while (count < flags->nb) {
-        flags->list[count] = 0;
-        count += 1;
+    flags->nb = 0;
+    flags->list = malloc(sizeof(int) * count);
+    if (flags->list == NULL)
+        return (0);
+    while (i < count) {
+        flags->list[i] = 0;
+        i += 1;
     }
+    return (1);
 }
 
 static int search_flag(char *arg, flag_t *flags)
@@ -55,6 +59,7 @@ static int search_flag(char *arg, flag_t *flags)
             my_putstr_error("./my_ls: invalid option: ");
             write(2, &arg[i], 1);
             write(2, "\n", 1);
+            free(flags->list);
             return (2);
         }
         flags->list[flag] = 1;
@@ -69,13 +74,15 @@ int get_flags(int ac, char **av, flag_t *flags)
     int nb_flags = 0;
     int is_flag;
 
-    init_flags(flags);
+    if (!init_flags(flags))
+        return (0);
     while (i < ac) {
         is_flag = search_flag(av[i], flags);
         if (is_flag == 2)
-            return (-1);
+            return (0);
         nb_flags += is_flag;
         i += 1;
     }
-    return (nb_flags);
+    flags->nb = nb_flags;
+    return (1);
 }

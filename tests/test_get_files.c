@@ -11,12 +11,14 @@
 
 Test(get_files_and_folders, get_the_files_to_read)
 {
+    flag_t flags;
     int ac = 3;
     char *av[] = {"./my_ls", "main.c", "-l"};
     list_t *files;
     file_t *file;
 
-    files = get_files_and_folders(ac, av, 1);
+    get_flags(ac, av, &flags);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     file = (file_t *)(files->data);
     cr_expect_str_eq(file->path, "main.c");
@@ -24,26 +26,31 @@ Test(get_files_and_folders, get_the_files_to_read)
     cr_expect_eq(file->type, FILE_TYPE);
     cr_expect_null(files->next);
     free_files_list(&files);
+    free(flags.list);
 }
 
 Test(get_files_and_folders, handle_no_files)
 {
+    flag_t flags;
     int ac = 1;
     char *av[] = {"./my_ls"};
     list_t *files;
     file_t *file;
 
-    files = get_files_and_folders(ac, av, 0);
+    get_flags(ac, av, &flags);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     file = (file_t *)(files->data);
     cr_expect_str_eq(file->path, ".");
     cr_expect_eq(file->type, DIR_TYPE);
     cr_expect_null(files->next);
     free_files_list(&files);
+    free(flags.list);
 }
 
 Test(get_files_and_folders, handle_unknown_files)
 {
+    flag_t flags;
     int ac = 4;
     char *av[] = {"./my_ls", "unknown", "-t", "-r"};
     list_t *files;
@@ -51,7 +58,8 @@ Test(get_files_and_folders, handle_unknown_files)
         "No such file or directory\n";
 
     cr_redirect_stderr();
-    files = get_files_and_folders(ac, av, 2);
+    get_flags(ac, av, &flags);
+    files = get_files_and_folders(ac, av, flags);
     cr_expect_null(files);
     cr_expect_stderr_eq_str(error_msg);
 }

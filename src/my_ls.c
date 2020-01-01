@@ -10,14 +10,14 @@
 static void print_list(list_t *files, flag_t flags, padding_t padding)
 {
     int first_print = 1;
-    int print_filepath = (flags.list[FLAG_R_UPPER] || files->next != NULL);
+    int print_filepath = (flags.list[R_UPPER] || files->next != NULL);
     file_t *file;
 
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
         if (file->type == FILE_TYPE ||
-        (file->type == DIR_TYPE && flags.list[FLAG_D_LOWER])) {
+        (file->type == DIR_TYPE && flags.list[D_LOWER])) {
             print_file_path(file, flags, padding);
             first_print = 0;
             continue;
@@ -33,9 +33,10 @@ void my_ls(list_t *files, flag_t flags)
 {
     padding_t padding;
 
-    if (flags.list[FLAG_D_LOWER])
+    if (flags.list[D_LOWER])
         get_padding(files, &padding, ALL_TYPES);
     else
         get_padding(files, &padding, FILE_TYPE);
     print_list(files, flags, padding);
+    free(flags.list);
 }

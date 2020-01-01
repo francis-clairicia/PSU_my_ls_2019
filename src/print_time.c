@@ -15,6 +15,8 @@ void print_time(time_t time)
         return;
     my_putstr(date[1]);
     my_putchar(' ');
+    if (my_strlen(date[2]) == 1)
+        my_putchar(' ');
     my_putstr(date[2]);
     my_putchar(' ');
     my_putstr(date[3]);

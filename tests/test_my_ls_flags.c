@@ -18,8 +18,8 @@ Test(my_ls, handle_l_lower_flag)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    cr_assert_eq(flags.list[FLAG_L_LOWER], 1);
-    files = get_files_and_folders(ac, av, 1);
+    cr_assert_eq(flags.list[L_LOWER], 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -35,8 +35,8 @@ Test(my_ls, handle_r_lower_flag)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    cr_assert_eq(flags.list[FLAG_R_LOWER], 1);
-    files = get_files_and_folders(ac, av, 1);
+    cr_assert_eq(flags.list[R_LOWER], 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -53,8 +53,8 @@ Test(my_ls, handle_t_lower_flag)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    cr_assert_eq(flags.list[FLAG_T_LOWER], 1);
-    files = get_files_and_folders(ac, av, 1);
+    cr_assert_eq(flags.list[T_LOWER], 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -71,8 +71,8 @@ Test(my_ls, handle_d_lower_flag)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    cr_assert_eq(flags.list[FLAG_D_LOWER], 1);
-    files = get_files_and_folders(ac, av, 1);
+    cr_assert_eq(flags.list[D_LOWER], 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -89,8 +89,8 @@ Test(my_ls, handle_r_upper_flag)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    cr_assert_eq(flags.list[FLAG_R_UPPER], 1);
-    files = get_files_and_folders(ac, av, 1);
+    cr_assert_eq(flags.list[R_UPPER], 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);

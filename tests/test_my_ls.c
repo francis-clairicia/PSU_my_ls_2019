@@ -18,7 +18,7 @@ Test(my_ls, lists_directories_content)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -35,7 +35,7 @@ Test(my_ls, lists_files)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);
@@ -52,7 +52,7 @@ Test(my_ls, lists_files_and_directories_content)
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, 1);
+    files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     init_list(&files, flags);
     my_ls(files, flags);

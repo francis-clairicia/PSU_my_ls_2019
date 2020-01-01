@@ -25,11 +25,11 @@
 enum FLAGS
 {
     UNKNOWN_FLAG = -1,
-    FLAG_D_LOWER,
-    FLAG_L_LOWER,
-    FLAG_R_LOWER,
-    FLAG_R_UPPER,
-    FLAG_T_LOWER
+    D_LOWER,
+    L_LOWER,
+    R_LOWER,
+    R_UPPER,
+    T_LOWER
 };
 
 enum TYPES
@@ -54,7 +54,7 @@ struct flag_format
 typedef struct flag
 {
     int nb;
-    int list[5];
+    int *list;
 } flag_t;
 
 typedef struct file
@@ -77,7 +77,7 @@ void my_ls(list_t *files, flag_t flags);
 
 void my_putstr_error(char const *str);
 int get_flags(int ac, char **av, flag_t *flags);
-list_t *get_files_and_folders(int ac, char **av, int nb_files);
+list_t *get_files_and_folders(int ac, char **av, flag_t flags);
 void free_files_list(list_t **files);
 int get_file_infos(char *filepath, file_t *file);
 void get_padding(list_t *files, padding_t *padding, int type);

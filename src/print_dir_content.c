@@ -36,10 +36,10 @@ static void print_total_block(list_t *files)
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
-        total += file->infos.st_blocks;
+        total += file->infos.st_blocks / 2;
     }
     my_putstr("total ");
-    my_put_nbr(total / 2);
+    my_put_nbr(total);
     my_putchar('\n');
 }
 
@@ -47,7 +47,7 @@ static void print_all_content(list_t *files, flag_t flags, padding_t padding)
 {
     file_t *file;
 
-    if (flags.list[FLAG_L_LOWER])
+    if (flags.list[L_LOWER])
         print_total_block(files);
     while (files != NULL) {
         file = (file_t *)(files->data);
@@ -86,7 +86,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
         set_up_list(&files, flags);
         get_padding(files, &padding, ALL_TYPES);
         print_all_content(files, flags, padding);
-        if (flags.list[FLAG_R_UPPER])
+        if (flags.list[R_UPPER])
             print_subdirectories(files, flags);
     }
     closedir(dirp);

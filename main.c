@@ -11,12 +11,10 @@ int main(int ac, char **av)
 {
     flag_t flags;
     list_t *files = NULL;
-    int nb_flags = get_flags(ac, av, &flags);
-    int nb_files = ac - 1 - nb_flags;
 
-    if (nb_flags < 0)
+    if (!get_flags(ac, av, &flags))
         return (84);
-    files = get_files_and_folders(ac, av, nb_files);
+    files = get_files_and_folders(ac, av, flags);
     if (files == NULL)
         return (84);
     init_list(&files, flags);

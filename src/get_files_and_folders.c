@@ -40,11 +40,13 @@ static int get_infos(int ac, char **av, list_t **files, int nb_files)
     return (status);
 }
 
-list_t *get_files_and_folders(int ac, char **av, int nb_files)
+list_t *get_files_and_folders(int ac, char **av, flag_t flags)
 {
+    int nb_files = ac - 1 - flags.nb;
     list_t *files = NULL;
 
     if (!get_infos(ac - 1, &av[1], &files, nb_files)) {
+        free(flags.list);
         free_files_list(&files);
         return (NULL);
     }

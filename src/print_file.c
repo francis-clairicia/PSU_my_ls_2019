@@ -24,22 +24,23 @@ static void print_link(file_t *file)
     free(buffer);
 }
 
-void print_file_path(file_t *file, flag_t flags, padding_t padding)
+static void print_file(file_t *file, char const *to_print,
+    flag_t flags, padding_t padding)
 {
-    if (flags.list[FLAG_L_LOWER] == 1)
+    if (flags.list[L_LOWER] == 1)
         print_infos(&(file->infos), padding);
-    my_putstr(file->path);
-    if (flags.list[FLAG_L_LOWER] == 1 && S_ISLNK(file->infos.st_mode))
+    my_putstr(to_print);
+    if (flags.list[L_LOWER] == 1 && S_ISLNK(file->infos.st_mode))
         print_link(file);
     my_putchar('\n');
 }
 
+void print_file_path(file_t *file, flag_t flags, padding_t padding)
+{
+    print_file(file, file->path, flags, padding);
+}
+
 void print_file_name(file_t *file, flag_t flags, padding_t padding)
 {
-    if (flags.list[FLAG_L_LOWER] == 1)
-        print_infos(&(file->infos), padding);
-    my_putstr(file->name);
-    if (flags.list[FLAG_L_LOWER] == 1 && S_ISLNK(file->infos.st_mode))
-        print_link(file);
-    my_putchar('\n');
+    print_file(file, file->name, flags, padding);
 }
