@@ -33,6 +33,7 @@ void my_ls(list_t *files, flag_t flags)
 {
     padding_t padding;
 
+    init_list(files, flags);
     if (flags.list[D_LOWER])
         get_padding(files, &padding, ALL_TYPES);
     else

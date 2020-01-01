@@ -17,7 +17,6 @@ int main(int ac, char **av)
     files = get_files_and_folders(ac, av, flags);
     if (files == NULL)
         return (84);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     return (0);

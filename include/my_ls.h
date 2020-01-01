@@ -82,8 +82,8 @@ void free_files_list(list_t **files);
 int get_file_infos(char *filepath, file_t *file);
 void get_padding(list_t *files, padding_t *padding, int type);
 
-void init_list(list_t **files, flag_t flags);
-void set_up_list(list_t **files, flag_t flags);
+void init_list(list_t *files, flag_t flags);
+void set_up_list(list_t *files, flag_t flags);
 void sort_files_list(list_t *files, enum SORTING_METHODS method,
     int ignore_type);
 int sorted_by_ascii(file_t *first, file_t *second, int ignore_type);

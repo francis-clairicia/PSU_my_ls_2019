@@ -21,7 +21,6 @@ Test(my_ls, handle_l_lower_flag)
     cr_assert_eq(flags.list[L_LOWER], 1);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
 }
@@ -38,7 +37,6 @@ Test(my_ls, handle_r_lower_flag)
     cr_assert_eq(flags.list[R_LOWER], 1);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("mylist.h\nmy_ls.h\nmy.h\n");
@@ -56,7 +54,6 @@ Test(my_ls, handle_t_lower_flag)
     cr_assert_eq(flags.list[T_LOWER], 1);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("my.h\nmylist.h\nmy_ls.h\n");
@@ -74,7 +71,6 @@ Test(my_ls, handle_d_lower_flag)
     cr_assert_eq(flags.list[D_LOWER], 1);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("include\n");
@@ -92,7 +88,6 @@ Test(my_ls, handle_r_upper_flag)
     cr_assert_eq(flags.list[R_UPPER], 1);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("include:\nmy.h\nmy_ls.h\nmylist.h\n");

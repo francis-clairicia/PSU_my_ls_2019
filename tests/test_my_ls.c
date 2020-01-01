@@ -20,7 +20,6 @@ Test(my_ls, lists_directories_content)
     get_flags(ac, av, &flags);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("my.h\nmy_ls.h\nmylist.h\n");
@@ -37,7 +36,6 @@ Test(my_ls, lists_files)
     get_flags(ac, av, &flags);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("Makefile\nmain.c\n");
@@ -54,7 +52,6 @@ Test(my_ls, lists_files_and_directories_content)
     get_flags(ac, av, &flags);
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
-    init_list(&files, flags);
     my_ls(files, flags);
     free_files_list(&files);
     cr_expect_stdout_eq_str("main.c\n\ninclude:\nmy.h\nmy_ls.h\nmylist.h\n");

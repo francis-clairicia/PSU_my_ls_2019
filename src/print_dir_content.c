@@ -83,7 +83,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
             my_putstr(filepath);
             my_putstr(":\n");
         }
-        set_up_list(&files, flags);
+        set_up_list(files, flags);
         get_padding(files, &padding, ALL_TYPES);
         print_all_content(files, flags, padding);
         if (flags.list[R_UPPER])
