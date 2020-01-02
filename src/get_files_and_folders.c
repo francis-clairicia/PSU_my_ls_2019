@@ -33,9 +33,9 @@ static int get_infos(int ac, char **av, list_t **files, int nb_files)
     int status = 1;
     char *default_folder[] = {"."};
 
-    if (nb_files == 0) {
+    if (nb_files == 0)
         status = get_infos_from_args(1, default_folder, files);
-    } else
+    else
         status = get_infos_from_args(ac, av, files);
     return (status);
 }

@@ -16,15 +16,13 @@ static void print_list(list_t *files, flag_t flags, padding_t padding)
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
-        if (file->type == FILE_TYPE ||
-        (file->type == DIR_TYPE && flags.list[D_LOWER])) {
+        if (file->type == FILE_TYPE
+        || (file->type == DIR_TYPE && flags.list[D_LOWER]))
             print_file_path(file, flags, padding);
-            first_print = 0;
-            continue;
-        }
-        if (!first_print)
+        if (!(flags.list[D_LOWER]) && !first_print && file->type == DIR_TYPE)
             my_putchar('\n');
-        print_dir_content(file->path, flags, print_filepath);
+        if (!(flags.list[D_LOWER]) && file->type == DIR_TYPE)
+            print_dir_content(file->path, flags, print_filepath);
         first_print = 0;
     }
 }
