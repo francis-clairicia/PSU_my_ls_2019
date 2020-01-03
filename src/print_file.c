@@ -11,17 +11,14 @@
 static void print_link(file_t *file)
 {
     int size = (file->infos.st_size == 0) ? PATH_MAX : file->infos.st_size;
-    char *buffer = malloc(sizeof(char) * (size + 1));
+    char buffer[size + 1];
 
-    if (buffer == NULL)
-        return;
     size = readlink(file->path, buffer, size);
     if (size >= 0) {
         buffer[size] = '\0';
         my_putstr(" -> ");
         my_putstr(buffer);
     }
-    free(buffer);
 }
 
 static void print_file(file_t *file, char const *to_print,
