@@ -37,7 +37,7 @@ Test(my_ls, lists_files)
     files = get_files_and_folders(ac, av, flags);
     cr_assert_not_null(files);
     my_ls(files, flags);
-    cr_expect_stdout_eq_str("Makefile\nmain.c\n");
+    cr_expect_stdout_eq_str("main.c\nMakefile\n");
     free_files_list(&files);
 }
 
