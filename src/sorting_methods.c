@@ -7,12 +7,22 @@
 
 #include "my_ls.h"
 
+static int compare_path(char const *first, char const *second)
+{
+    char first_copy[my_strlen(first) + 1];
+    char second_copy[my_strlen(second) + 1];
+
+    my_strlowcase(my_strcpy(first_copy, first));
+    my_strlowcase(my_strcpy(second_copy, second));
+    return (my_strcmp(first_copy, second_copy));
+}
+
 int sorted_by_ascii(file_t *first, file_t *second, int ignore_type)
 {
     if (!ignore_type && first->type == DIR_TYPE && second->type == FILE_TYPE)
         return (0);
     if (ignore_type || (!ignore_type && first->type == second->type))
-        return (my_strcmp(first->path, second->path) < 1);
+        return (compare_path(first->path, second->path) < 1);
     return (1);
 }
 
