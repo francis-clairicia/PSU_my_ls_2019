@@ -77,7 +77,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
     padding_t padding;
 
     if (dirp == NULL)
-        return;
+        return (print_error_open(filepath));
     if (get_files(&files, dirp, filepath)) {
         if (print_filepath) {
             my_putstr(filepath);

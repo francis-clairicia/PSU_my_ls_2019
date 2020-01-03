@@ -79,7 +79,6 @@ typedef struct padding
 
 void my_ls(list_t *files, flag_t flags);
 
-void my_putstr_error(char const *str);
 int get_flags(int ac, char **av, flag_t *flags);
 list_t *get_files_and_folders(int ac, char **av, flag_t flags);
 void free_files_list(list_t **files);
@@ -103,6 +102,10 @@ void print_permissions(mode_t mode);
 void print_user(uid_t id, int padding);
 void print_group(gid_t id, int padding);
 void print_time(time_t time);
+
+void my_putstr_error(char const *str);
+int print_error_access(char const *filepath);
+void print_error_open(char const *filepath);
 
 char *join_path(char const *path_1, char const *path_2);
 

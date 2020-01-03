@@ -18,12 +18,8 @@ static char *get_filename(char *filepath)
 
 int get_file_infos(char *filepath, file_t *file)
 {
-    if (lstat(filepath, &(file->infos)) < 0) {
-        my_putstr_error("./my_ls: cannot access '");
-        my_putstr_error(filepath);
-        perror("'");
-        return (0);
-    }
+    if (lstat(filepath, &(file->infos)) < 0)
+        return (print_error_access(filepath));
     file->path = my_strdup(filepath);
     file->name = get_filename(file->path);
     file->type = S_ISDIR(file->infos.st_mode);

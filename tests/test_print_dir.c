@@ -17,4 +17,5 @@ Test(print_dir_content, special_case)
     get_flags(1, (char *[]){"-R"}, &flags);
     print_dir_content("lib/", flags, 1);
     cr_expect_stdout_neq_str("\n");
+    free(flags.list);
 }
