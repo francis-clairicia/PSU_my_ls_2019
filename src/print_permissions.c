@@ -11,6 +11,8 @@ void print_permissions(mode_t mode)
 {
     if (S_ISLNK(mode))
         my_putchar('l');
+    else if (S_ISCHR(mode))
+        my_putchar('c');
     else
         my_putchar((S_ISDIR(mode)) ? 'd' : '-');
     my_putchar((mode & S_IRUSR) ? 'r' : '-');
