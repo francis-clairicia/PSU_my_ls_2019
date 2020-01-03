@@ -7,14 +7,24 @@
 
 #include "my_ls.h"
 
+static char filetype(mode_t mode)
+{
+    char type = '-';
+
+    if (S_ISDIR(mode))
+        type = 'd';
+    if (S_ISLNK(mode))
+        type = 'l';
+    if (S_ISFIFO(mode))
+        type = 'p';
+    if (S_ISCHR(mode))
+        type = 'c';
+    return (type);
+}
+
 void print_permissions(mode_t mode)
 {
-    if (S_ISLNK(mode))
-        my_putchar('l');
-    else if (S_ISCHR(mode))
-        my_putchar('c');
-    else
-        my_putchar((S_ISDIR(mode)) ? 'd' : '-');
+    my_putchar(filetype(mode));
     my_putchar((mode & S_IRUSR) ? 'r' : '-');
     my_putchar((mode & S_IWUSR) ? 'w' : '-');
     my_putchar((mode & S_IXUSR) ? 'x' : '-');
@@ -23,5 +33,8 @@ void print_permissions(mode_t mode)
     my_putchar((mode & S_IXGRP) ? 'x' : '-');
     my_putchar((mode & S_IROTH) ? 'r' : '-');
     my_putchar((mode & S_IWOTH) ? 'w' : '-');
-    my_putchar((mode & S_IXOTH) ? 'x' : '-');
+    if (mode & S_ISVTX)
+        my_putchar('t');
+    else
+        my_putchar((mode & S_IXOTH) ? 'x' : '-');
 }

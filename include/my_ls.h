@@ -22,6 +22,10 @@
 
 #define MAX(a, b) ((b > a) ? b : a)
 
+#ifndef S_ISVTX
+#define S_ISVTX	0001000
+#endif
+
 enum FLAGS
 {
     UNKNOWN_FLAG = -1,
