@@ -30,14 +30,9 @@ static int get_infos_from_args(int ac, char **av, list_t **files)
 
 static int get_infos(int ac, char **av, list_t **files, int nb_files)
 {
-    int status = 1;
-    char *default_folder[] = {"."};
-
     if (nb_files == 0)
-        status = get_infos_from_args(1, default_folder, files);
-    else
-        status = get_infos_from_args(ac, av, files);
-    return (status);
+        return (get_infos_from_args(1, (char *[]){"."}, files));
+    return (get_infos_from_args(ac, av, files));
 }
 
 list_t *get_files_and_folders(int ac, char **av, flag_t flags)

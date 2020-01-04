@@ -103,7 +103,7 @@ void print_user(uid_t id, int padding);
 void print_group(gid_t id, int padding);
 void print_time(time_t time);
 
-void my_putstr_error(char const *str);
+int print_error_option(char flag);
 int print_error_access(char const *filepath, char const *error);
 void print_error_open(char const *filepath, char const *error);
 

@@ -9,11 +9,11 @@
 #include <criterion/redirect.h>
 #include "my_ls.h"
 
-Test(my_putstr_error, write_in_stderr)
+Test(print_error_option, write_in_stderr)
 {
     cr_redirect_stderr();
-    my_putstr_error("Hello");
-    cr_expect_stderr_eq_str("Hello");
+    print_error_option('z');
+    cr_expect_stderr_eq_str("./my_ls: invalid option: z\n");
 }
 
 Test(print_error_access, write_in_stderr)

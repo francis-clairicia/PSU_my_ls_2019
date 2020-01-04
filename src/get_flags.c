@@ -56,11 +56,8 @@ static int search_flag(char *arg, flag_t *flags)
     while (arg[i] != '\0') {
         flag = find_in_flag_list(arg[i]);
         if (flag == UNKNOWN_FLAG) {
-            my_putstr_error("./my_ls: invalid option: ");
-            write(2, &arg[i], 1);
-            write(2, "\n", 1);
             free(flags->list);
-            return (2);
+            return (print_error_option(arg[i]));
         }
         flags->list[flag] = 1;
         i += 1;
