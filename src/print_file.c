@@ -8,12 +8,12 @@
 #include <linux/limits.h>
 #include "my_ls.h"
 
-static void print_link(file_t *file)
+static void print_link(char const *filepath, off_t st_size)
 {
-    int size = (file->infos.st_size == 0) ? PATH_MAX : file->infos.st_size;
+    int size = (st_size == 0) ? PATH_MAX : st_size;
     char buffer[size + 1];
 
-    size = readlink(file->path, buffer, size);
+    size = readlink(filepath, buffer, size);
     if (size >= 0) {
         buffer[size] = '\0';
         my_putstr(" -> ");
@@ -28,7 +28,7 @@ static void print_file(file_t *file, char const *to_print,
         print_infos(&(file->infos), padding);
     my_putstr(to_print);
     if (flags.list[L_LOWER] == 1 && S_ISLNK(file->infos.st_mode))
-        print_link(file);
+        print_link(file->path, file->infos.st_size);
     my_putchar('\n');
 }
 

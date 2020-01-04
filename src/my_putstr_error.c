@@ -9,7 +9,5 @@
 
 void my_putstr_error(char const *str)
 {
-    int len = my_strlen(str);
-
-    write(2, str, len);
+    write(2, str, my_strlen(str));
 }

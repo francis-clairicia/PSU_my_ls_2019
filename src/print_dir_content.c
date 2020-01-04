@@ -36,8 +36,9 @@ static void print_total_block(list_t *files)
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
-        total += file->infos.st_blocks / 2;
+        total += file->infos.st_blocks;
     }
+    total /= 2;
     my_putstr("total ");
     my_put_nbr(total);
     my_putchar('\n');
@@ -77,7 +78,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
     padding_t padding;
 
     if (dirp == NULL)
-        return (print_error_open(filepath));
+        return (print_error_open(filepath, strerror(errno)));
     if (get_files(&files, dirp, filepath)) {
         if (print_filepath) {
             my_putstr(filepath);

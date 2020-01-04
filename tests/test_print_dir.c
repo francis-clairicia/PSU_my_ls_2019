@@ -19,3 +19,15 @@ Test(print_dir_content, special_case)
     cr_expect_stdout_neq_str("\n");
     free(flags.list);
 }
+
+Test(print_dir_content, cant_open_folder)
+{
+    flag_t flags;
+
+    cr_redirect_stderr();
+    get_flags(2, (char *[]){"./my_ls", "/root"}, &flags);
+    print_dir_content("/root", flags, 0);
+    cr_expect_stderr_eq_str("./my_ls: cannot open directory '/root': "
+        "Permission denied\n");
+    free(flags.list);
+}
