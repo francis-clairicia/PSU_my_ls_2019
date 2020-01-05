@@ -32,9 +32,9 @@ Test(print_file, print_a_link)
 
     cr_redirect_stdout();
     get_flags(1, (char *[]){"-l"}, &flags);
-    get_file_infos("link_main.c", &file);
+    get_file_infos("tests/.test_files/link_to_regular_file", &file);
     print_file_name(&file, flags, padding);
     print_file_path(&file, flags, padding);
-    cr_expect_stdout_neq_str("link_main.c\n");
+    cr_expect_stdout_neq_str("\n");
     free(flags.list);
 }

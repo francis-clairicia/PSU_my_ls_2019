@@ -22,8 +22,9 @@ static int get_files(list_t **list, DIR *dirp, char const *current_filepath)
             get_file_infos(filepath, file);
             my_append_to_list(list, (long)file);
             free(filepath);
-        } else
+        } else {
             free(file);
+        }
     }
     return (1);
 }

@@ -22,8 +22,12 @@
 
 #define MAX(a, b) ((b > a) ? b : a)
 
+#ifndef S_ISSOCK
+#define S_ISSOCK(mode) __S_ISTYPE(mode, __S_IFSOCK)
+#endif
+
 #ifndef S_ISVTX
-#define S_ISVTX	0001000
+#define S_ISVTX	__S_ISVTX
 #endif
 
 enum FLAGS

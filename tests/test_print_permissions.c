@@ -14,7 +14,7 @@ Test(print_permissions, print_file_permissions)
     struct stat infos;
 
     cr_redirect_stdout();
-    cr_assert_neq(stat("main.c", &infos), -1);
+    cr_assert_neq(stat("tests/.test_files/regular_file", &infos), -1);
     print_permissions(infos.st_mode);
     cr_expect_stdout_eq_str("-rw-rw-r--");
 }
@@ -34,27 +34,7 @@ Test(print_permissions, print_symbolik_link_permissions)
     struct stat infos;
 
     cr_redirect_stdout();
-    cr_assert_neq(lstat("link_main.c", &infos), -1);
+    cr_assert_neq(lstat("tests/.test_files/link_to_regular_file", &infos), -1);
     print_permissions(infos.st_mode);
     cr_expect_stdout_eq_str("lrwxrwxrwx");
-}
-
-Test(print_permissions, print_char_device_file_permissions)
-{
-    struct stat infos;
-
-    cr_redirect_stdout();
-    cr_assert_neq(stat("/dev/tty", &infos), -1);
-    print_permissions(infos.st_mode);
-    cr_expect_stdout_eq_str("crw-rw-rw-");
-}
-
-Test(print_permissions, print_fifo_file_permissions)
-{
-    struct stat infos;
-
-    cr_redirect_stdout();
-    cr_assert_neq(stat("pipe_file.c", &infos), -1);
-    print_permissions(infos.st_mode);
-    cr_expect_stdout_eq_str("prw-rw-r-t");
 }
