@@ -53,6 +53,8 @@ void sort_files_list(list_t *files, enum SORTING_METHODS method,
     file_t *second;
     list_t *node;
 
+    if (files == NULL)
+        return;
     while ((node = is_sorted(files, method, ignore_type)) != NULL) {
         first = (file_t *)(node->data);
         second = (file_t *)(node->next->data);
