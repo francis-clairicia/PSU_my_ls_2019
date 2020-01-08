@@ -10,6 +10,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/sysmacros.h>
 #include <unistd.h>
 #include <dirent.h>
 #include <errno.h>
@@ -78,6 +79,8 @@ typedef struct padding
     int nlink;
     int user;
     int group;
+    int maj_v;
+    int min_v;
     int size;
 } padding_t;
 
@@ -105,6 +108,7 @@ void print_number(long nb, int padding);
 void print_permissions(mode_t mode);
 void print_user(uid_t id, int padding);
 void print_group(gid_t id, int padding);
+void print_major_minor(dev_t dev_id, int padding_maj, int padding_min);
 void print_time(time_t time);
 
 int print_error_option(char flag);

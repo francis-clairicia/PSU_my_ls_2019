@@ -16,6 +16,7 @@ SRC_TEST	=	$(SRC_DIR)/my_ls.c					\
 				$(SRC_DIR)/print_infos.c			\
 				$(SRC_DIR)/print_permissions.c		\
 				$(SRC_DIR)/print_user_group.c		\
+				$(SRC_DIR)/print_major_minor.c		\
 				$(SRC_DIR)/print_time.c				\
 				$(SRC_DIR)/print_error.c			\
 				$(SRC_DIR)/get_flags.c				\

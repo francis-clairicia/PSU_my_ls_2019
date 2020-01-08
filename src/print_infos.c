@@ -29,7 +29,10 @@ void print_infos(struct stat *infos, padding_t padding)
     my_putchar(' ');
     print_group(infos->st_gid, padding.group);
     my_putchar(' ');
-    print_number((long)infos->st_size, padding.size);
+    if (S_ISBLK(infos->st_mode) || S_ISCHR(infos->st_mode))
+        print_major_minor(infos->st_rdev, padding.maj_v, padding.min_v);
+    else
+        print_number((long)infos->st_size, padding.size);
     my_putchar(' ');
     print_time(infos->st_mtime);
     my_putchar(' ');
