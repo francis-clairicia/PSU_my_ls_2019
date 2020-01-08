@@ -88,20 +88,20 @@ list_t *get_files_and_folders(int ac, char **av, flag_t flags);
 void free_files_list(list_t **files);
 int get_file_infos(char *filepath, file_t *file);
 void get_padding(list_t *files, padding_t *padding, int type);
+int get_files_from_dir(list_t **list, DIR *dirp, char const *current_filepath);
 
-void init_list(list_t *files, flag_t flags);
 void set_up_list(list_t *files, flag_t flags);
-void sort_files_list(list_t *files, enum SORTING_METHODS method,
-    int ignore_type);
-int sorted_by_ascii(file_t *first, file_t *second, int ignore_type);
-int sorted_by_modifications(file_t *first, file_t *second, int ignore_type);
-#define sort_files(files, method) sort_files_list(files, method, 1)
-#define sort_files_by_type(files, method) sort_files_list(files, method, 0)
+void sort_files(list_t *files, enum SORTING_METHODS method);
+int sorted_by_ascii(file_t *first, file_t *second);
+int sorted_by_modifications(file_t *first, file_t *second);
 
 void print_file_path(file_t *file, flag_t flags, padding_t padding);
 void print_file_name(file_t *file, flag_t flags, padding_t padding);
 void print_dir_content(char const *filepath, flag_t flags, int print_filepath);
+void print_long_format(file_t *file, char const *to_print,
+    padding_t padding);
 void print_infos(struct stat *infos, padding_t padding);
+void print_number(long nb, int padding);
 void print_permissions(mode_t mode);
 void print_user(uid_t id, int padding);
 void print_group(gid_t id, int padding);

@@ -7,28 +7,6 @@
 
 #include "my_ls.h"
 
-static int get_files(list_t **list, DIR *dirp, char const *current_filepath)
-{
-    file_t *file;
-    struct dirent *ent;
-    char *filepath;
-
-    while ((ent = readdir(dirp)) != NULL) {
-        file = malloc(sizeof(file_t));
-        if (file == NULL)
-            return (0);
-        if (ent->d_name[0] != '.') {
-            filepath = join_path(current_filepath, ent->d_name);
-            get_file_infos(filepath, file);
-            my_append_to_list(list, (long)file);
-            free(filepath);
-        } else {
-            free(file);
-        }
-    }
-    return (1);
-}
-
 static void print_total_block(list_t *files)
 {
     file_t *file;
@@ -80,7 +58,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
 
     if (dirp == NULL)
         return (print_error_open(filepath, strerror(errno)));
-    if (get_files(&files, dirp, filepath)) {
+    if (get_files_from_dir(&files, dirp, filepath)) {
         if (print_filepath) {
             my_putstr(filepath);
             my_putstr(":\n");

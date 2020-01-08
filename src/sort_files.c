@@ -7,22 +7,21 @@
 
 #include "my_ls.h"
 
-static int (*sorting_functions[])(file_t *, file_t *, int) = {
+static int (*sorting_functions[])(file_t *, file_t *) = {
     &sorted_by_ascii,
     &sorted_by_modifications
 };
 
-static list_t *is_sorted(list_t *files, enum SORTING_METHODS method,
-    int ignore_type)
+static list_t *is_sorted(list_t *files, enum SORTING_METHODS method)
 {
     file_t *first;
     file_t *second;
-    int (*sorted)(file_t *, file_t *, int) = sorting_functions[method];
+    int (*sorted)(file_t *, file_t *) = sorting_functions[method];
 
     while (files->next != NULL) {
         first = (file_t *)(files->data);
         second = (file_t *)(files->next->data);
-        if (!sorted(first, second, ignore_type))
+        if (!sorted(first, second))
             return (files);
         files = files->next;
     }
@@ -46,8 +45,7 @@ static void swap(file_t *first, file_t *second)
     first->infos = infos;
 }
 
-void sort_files_list(list_t *files, enum SORTING_METHODS method,
-    int ignore_type)
+void sort_files(list_t *files, enum SORTING_METHODS method)
 {
     file_t *first;
     file_t *second;
@@ -55,7 +53,7 @@ void sort_files_list(list_t *files, enum SORTING_METHODS method,
 
     if (files == NULL)
         return;
-    while ((node = is_sorted(files, method, ignore_type)) != NULL) {
+    while ((node = is_sorted(files, method)) != NULL) {
         first = (file_t *)(node->data);
         second = (file_t *)(node->next->data);
         swap(first, second);

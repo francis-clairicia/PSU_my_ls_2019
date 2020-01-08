@@ -8,10 +8,10 @@
 #include "my_ls.h"
 
 static const struct flag_format flag_list[] = {
+    {'d', D_LOWER},
     {'l', L_LOWER},
     {'r', R_LOWER},
     {'R', R_UPPER},
-    {'d', D_LOWER},
     {'t', T_LOWER},
     {'\0', UNKNOWN_FLAG}
 };

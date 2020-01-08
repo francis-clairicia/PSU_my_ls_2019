@@ -17,20 +17,12 @@ static int compare_path(char const *first, char const *second)
     return (my_strcmp(first_copy, second_copy));
 }
 
-int sorted_by_ascii(file_t *first, file_t *second, int ignore_type)
+int sorted_by_ascii(file_t *first, file_t *second)
 {
-    if (!ignore_type && first->type == DIR_TYPE && second->type == FILE_TYPE)
-        return (0);
-    if (ignore_type || (!ignore_type && first->type == second->type))
-        return (compare_path(first->path, second->path) < 1);
-    return (1);
+    return (compare_path(first->path, second->path) < 1);
 }
 
-int sorted_by_modifications(file_t *first, file_t *second, int ignore_type)
+int sorted_by_modifications(file_t *first, file_t *second)
 {
-    if (!ignore_type && first->type == DIR_TYPE && second->type == FILE_TYPE)
-        return (0);
-    if (ignore_type || (!ignore_type && first->type == second->type))
-        return (first->infos.st_mtime >= second->infos.st_mtime);
-    return (1);
+    return (first->infos.st_mtime >= second->infos.st_mtime);
 }

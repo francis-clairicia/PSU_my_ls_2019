@@ -12,6 +12,7 @@ SRC_DIR		=	src
 SRC_TEST	=	$(SRC_DIR)/my_ls.c					\
 				$(SRC_DIR)/print_file.c				\
 				$(SRC_DIR)/print_dir_content.c		\
+				$(SRC_DIR)/print_long_format.c		\
 				$(SRC_DIR)/print_infos.c			\
 				$(SRC_DIR)/print_permissions.c		\
 				$(SRC_DIR)/print_user_group.c		\
@@ -20,6 +21,7 @@ SRC_TEST	=	$(SRC_DIR)/my_ls.c					\
 				$(SRC_DIR)/get_flags.c				\
 				$(SRC_DIR)/get_files_and_folders.c	\
 				$(SRC_DIR)/get_file_infos.c			\
+				$(SRC_DIR)/get_files_from_dir.c		\
 				$(SRC_DIR)/free_files_list.c		\
 				$(SRC_DIR)/get_padding.c			\
 				$(SRC_DIR)/sort_files.c				\
