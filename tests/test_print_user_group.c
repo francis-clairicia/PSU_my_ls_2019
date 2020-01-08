@@ -11,7 +11,7 @@
 
 Test(print_user, high_padding)
 {
-    padding_t padding = {0, 100000, 100000, 0};
+    padding_t padding = {0, 100000, 100000, 0, 0, 0};
     struct stat infos;
 
     cr_redirect_stdout();
@@ -22,7 +22,7 @@ Test(print_user, high_padding)
 
 Test(print_group, high_padding)
 {
-    padding_t padding = {0, 100000, 100000, 0};
+    padding_t padding = {0, 100000, 100000, 0, 0, 0};
     struct stat infos;
 
     cr_redirect_stdout();

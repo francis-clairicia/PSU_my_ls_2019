@@ -12,7 +12,7 @@
 Test(print_file, print_a_file)
 {
     flag_t flags;
-    padding_t padding = {0, 0, 0, 0};
+    padding_t padding = {0, 0, 0, 0, 0, 0};
     file_t file;
 
     cr_redirect_stdout();
@@ -27,7 +27,7 @@ Test(print_file, print_a_file)
 Test(print_file, print_a_link)
 {
     flag_t flags;
-    padding_t padding = {0, 0, 0, 0};
+    padding_t padding = {0, 0, 0, 0, 0, 0};
     file_t file;
 
     cr_redirect_stdout();
