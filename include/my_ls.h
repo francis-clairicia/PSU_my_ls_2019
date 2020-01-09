@@ -87,7 +87,7 @@ typedef struct padding
 void my_ls(list_t *files, flag_t flags);
 
 int get_flags(int ac, char **av, flag_t *flags);
-list_t *get_files_and_folders(int ac, char **av, flag_t flags);
+list_t *get_files_and_folders(int ac, char **av, flag_t flags, int *output);
 void free_files_list(list_t **files);
 int get_file_infos(char *filepath, file_t *file);
 void get_padding(list_t *files, padding_t *padding, int type);

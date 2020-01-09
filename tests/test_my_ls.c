@@ -14,11 +14,12 @@ Test(my_ls, lists_directories_content)
     char *av[] = {"./my_ls", "include"};
     int ac = sizeof(av) / sizeof(av[0]);
     flag_t flags;
+    int output = 0;
     list_t *files;
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, flags);
+    files = get_files_and_folders(ac, av, flags, &output);
     cr_assert_not_null(files);
     my_ls(files, flags);
     free_files_list(&files);
@@ -29,12 +30,13 @@ Test(my_ls, lists_files)
 {
     char *av[] = {"./my_ls", "main.c", "Makefile"};
     int ac = sizeof(av) / sizeof(av[0]);
+    int output = 0;
     flag_t flags;
     list_t *files;
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, flags);
+    files = get_files_and_folders(ac, av, flags, &output);
     cr_assert_not_null(files);
     my_ls(files, flags);
     cr_expect_stdout_eq_str("main.c\nMakefile\n");
@@ -45,12 +47,13 @@ Test(my_ls, lists_files_and_directories_content)
 {
     char *av[] = {"./my_ls", "include", "main.c"};
     int ac = sizeof(av) / sizeof(av[0]);
+    int output = 0;
     flag_t flags;
     list_t *files;
 
     cr_redirect_stdout();
     get_flags(ac, av, &flags);
-    files = get_files_and_folders(ac, av, flags);
+    files = get_files_and_folders(ac, av, flags, &output);
     cr_assert_not_null(files);
     my_ls(files, flags);
     free_files_list(&files);
