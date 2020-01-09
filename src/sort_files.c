@@ -7,15 +7,14 @@
 
 #include "my_ls.h"
 
-static int (*sorting_functions[])(file_t *, file_t *) = {
-    &sorted_by_ascii,
-    &sorted_by_modifications
-};
-
 static list_t *is_sorted(list_t *files, enum SORTING_METHODS method)
 {
     file_t *first;
     file_t *second;
+    int (*sorting_functions[])(file_t *, file_t *) = {
+        &sorted_by_ascii,
+        &sorted_by_modifications
+    };
     int (*sorted)(file_t *, file_t *) = sorting_functions[method];
 
     while (files->next != NULL) {
