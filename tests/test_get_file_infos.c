@@ -23,6 +23,20 @@ Test(get_file_infos, get_the_file_informations)
     cr_expect_eq(file.type, FILE_TYPE);
 }
 
+Test(get_file_infos, get_the_dir_informations)
+{
+    file_t file;
+    char filepath[] = "include/";
+    struct stat infos;
+
+    cr_expect_eq(get_file_infos(filepath, &file), 1);
+    stat(filepath, &infos);
+    cr_expect_str_eq(file.path, filepath);
+    cr_expect_str_eq(file.name, "include/");
+    cr_expect_eq(file.infos.st_ino, infos.st_ino);
+    cr_expect_eq(file.type, DIR_TYPE);
+}
+
 Test(get_file_infos, handle_non_existing_file)
 {
     file_t file;

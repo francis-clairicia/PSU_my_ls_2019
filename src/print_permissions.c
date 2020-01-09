@@ -21,7 +21,9 @@ static char filetype(mode_t mode)
         return ('p');
     if (S_ISDIR(mode))
         return ('d');
-    return ('-');
+    if (S_ISREG(mode))
+        return ('-');
+    return ('?');
 }
 
 void print_permissions(mode_t mode)

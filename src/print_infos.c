@@ -12,11 +12,11 @@ void print_number(long nb, int padding)
     int i = 0;
     int len = my_nbr_len(nb);
 
-    my_put_nbr(nb);
     while (i < padding - len) {
         my_putchar(' ');
         i += 1;
     }
+    my_put_nbr(nb);
 }
 
 void print_infos(struct stat *infos, padding_t padding)

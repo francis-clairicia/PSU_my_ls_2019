@@ -11,8 +11,12 @@ static char *get_filename(char *filepath)
 {
     int n;
 
-    while ((n = my_find_char(filepath, '/')) >= 0)
-        filepath = &filepath[n + 1];
+    while ((n = my_find_char(filepath, '/')) >= 0) {
+        if (my_strlen(&filepath[n + 1]))
+            filepath = &filepath[n + 1];
+        else
+            break;
+    }
     return (filepath);
 }
 

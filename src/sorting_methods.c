@@ -7,7 +7,7 @@
 
 #include "my_ls.h"
 
-static int compare_path(char const *first, char const *second)
+static int compare_name(char const *first, char const *second)
 {
     char first_copy[my_strlen(first) + 1];
     char second_copy[my_strlen(second) + 1];
@@ -19,7 +19,7 @@ static int compare_path(char const *first, char const *second)
 
 int sorted_by_ascii(file_t *first, file_t *second)
 {
-    return (compare_path(first->path, second->path) < 1);
+    return (compare_name(first->name, second->name) < 1);
 }
 
 int sorted_by_modifications(file_t *first, file_t *second)

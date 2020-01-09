@@ -17,7 +17,7 @@ int print_error_option(char flag)
     my_putstr_error("./my_ls: invalid option: ");
     write(2, &flag, 1);
     my_putstr_error("\n");
-    return (2);
+    return (-1);
 }
 
 int print_error_access(char const *filepath, char const *error)

@@ -75,7 +75,7 @@ int get_flags(int ac, char **av, flag_t *flags)
         return (0);
     while (i < ac) {
         is_flag = search_flag(av[i], flags);
-        if (is_flag == 2)
+        if (is_flag < 0)
             return (0);
         nb_flags += is_flag;
         i += 1;

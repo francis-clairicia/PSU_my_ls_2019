@@ -59,7 +59,7 @@ void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
     if (dirp == NULL)
         return (print_error_open(filepath, strerror(errno)));
     if (get_files_from_dir(&files, dirp, filepath)) {
-        if (print_filepath) {
+        if (print_filepath || flags.list[R_UPPER]) {
             my_putstr(filepath);
             my_putstr(":\n");
         }
