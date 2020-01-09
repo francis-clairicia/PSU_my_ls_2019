@@ -18,14 +18,13 @@ static int get_infos_from_args(int ac, char **av, list_t **files)
             continue;
         }
         file = malloc(sizeof(file_t));
-        if (file == NULL || !get_file_infos(av[i], file)) {
+        if (file == NULL || !get_file_infos(av[i], file))
             free(file);
-            return (0);
-        }
-        my_append_to_list(files, (long)file);
+        else
+            my_append_to_list(files, (long)file);
         i += 1;
     }
-    return (1);
+    return (*files != NULL);
 }
 
 static int get_infos(int ac, char **av, list_t **files, int nb_files)
