@@ -7,6 +7,15 @@
 
 #include "my_ls.h"
 
+static void print_filepath_at_beginning(char const *filepath, flag_t flags,
+    int print_filepath)
+{
+    if (print_filepath || flags.list[R_UPPER]) {
+        my_putstr(filepath);
+        my_putstr(":\n");
+    }
+}
+
 static void print_total_block(list_t *files)
 {
     file_t *file;
@@ -36,39 +45,41 @@ static void print_all_content(list_t *files, flag_t flags, padding_t padding)
     }
 }
 
-static void print_subdirectories(list_t *files, flag_t flags)
+static int print_subdirectories(list_t *files, flag_t flags)
 {
     file_t *file;
+    int output = 1;
 
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
         if (file->type == DIR_TYPE) {
             my_putchar('\n');
-            print_dir_content(file->path, flags, 1);
+            if (!print_dir_content(file->path, flags, 1))
+                output = 0;
         }
     }
+    return (output);
 }
 
-void print_dir_content(char const *filepath, flag_t flags, int print_filepath)
+int print_dir_content(char const *filepath, flag_t flags, int print_filepath)
 {
     list_t *files = NULL;
     DIR *dirp = opendir(filepath);
     padding_t padding;
+    int output = 1;
 
     if (dirp == NULL)
         return (print_error_open(filepath, strerror(errno)));
     if (get_files_from_dir(&files, dirp, filepath)) {
-        if (print_filepath || flags.list[R_UPPER]) {
-            my_putstr(filepath);
-            my_putstr(":\n");
-        }
+        print_filepath_at_beginning(filepath, flags, print_filepath);
         set_up_list(files, flags);
         get_padding(files, &padding, ALL_TYPES);
         print_all_content(files, flags, padding);
         if (flags.list[R_UPPER])
-            print_subdirectories(files, flags);
+            output = print_subdirectories(files, flags);
     }
     closedir(dirp);
     free_files_list(&files);
+    return (output);
 }

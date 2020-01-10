@@ -84,7 +84,7 @@ typedef struct padding
     int size;
 } padding_t;
 
-void my_ls(list_t *files, flag_t flags);
+int my_ls(list_t *files, flag_t flags);
 
 int get_flags(int ac, char **av, flag_t *flags);
 list_t *get_files_and_folders(int ac, char **av, flag_t flags, int *output);
@@ -100,7 +100,7 @@ int sorted_by_modifications(file_t *first, file_t *second);
 
 void print_file_path(file_t *file, flag_t flags, padding_t padding);
 void print_file_name(file_t *file, flag_t flags, padding_t padding);
-void print_dir_content(char const *filepath, flag_t flags, int print_filepath);
+int print_dir_content(char const *filepath, flag_t flags, int print_filepath);
 void print_long_format(file_t *file, char const *to_print,
     padding_t padding);
 void print_infos(struct stat *infos, padding_t padding);
@@ -113,7 +113,7 @@ void print_time(time_t time);
 
 int print_error_option(char flag);
 int print_error_access(char const *filepath, char const *error);
-void print_error_open(char const *filepath, char const *error);
+int print_error_open(char const *filepath, char const *error);
 
 char *join_path(char const *path_1, char const *path_2);
 

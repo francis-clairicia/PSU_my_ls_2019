@@ -32,34 +32,37 @@ static void print_all(list_t *files, flag_t flags, padding_t padding)
     }
 }
 
-static void print_files_dir(list_t *files, list_t *dirs,
+static int print_files_dir(list_t *files, list_t *dirs,
     flag_t flags, padding_t padding)
 {
     int print_filepath;
     int print_newline = (files != NULL);
     file_t *file;
+    int output = 0;
 
     print_filepath = (dirs != NULL && (files != NULL || dirs->next != NULL));
     while (files != NULL) {
         file = (file_t *)(files->data);
         files = files->next;
         print_file_path(file, flags, padding);
-    }
-    while (dirs != NULL) {
+    } while (dirs != NULL) {
         file = (file_t *)(dirs->data);
         dirs = dirs->next;
         if (print_newline)
             my_putchar('\n');
-        print_dir_content(file->path, flags, print_filepath);
+        if (!print_dir_content(file->path, flags, print_filepath))
+            output = 84;
         print_newline = 1;
     }
+    return (output);
 }
 
-void my_ls(list_t *files, flag_t flags)
+int my_ls(list_t *files, flag_t flags)
 {
     list_t *file_list = NULL;
     list_t *dir_list = NULL;
     padding_t padding;
+    int output = 0;
 
     set_up_list(files, flags);
     if (flags.list[D_LOWER]) {
@@ -68,9 +71,10 @@ void my_ls(list_t *files, flag_t flags)
     } else {
         get_padding(files, &padding, FILE_TYPE);
         get_file_with_type(files, &file_list, &dir_list);
-        print_files_dir(file_list, dir_list, flags, padding);
+        output = print_files_dir(file_list, dir_list, flags, padding);
         my_free_list(&file_list, 0);
         my_free_list(&dir_list, 0);
     }
     free(flags.list);
+    return (output);
 }
